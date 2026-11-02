@@ -16,6 +16,7 @@ function Chat({}) {
     const [ai_options, setAiOptions] = useState({stream: true, model: "gpt-4o-mini", temperature: 0.7});
     const [waitingForResponse, setWaitingForResponse] = useState(false);
 
+    const UNDEFINED_LEN = "undefined".length;
 
     const onSend = async (message) => {
         // todo - docs
@@ -51,11 +52,15 @@ function Chat({}) {
                 // console.log(`received part ${i}`)
             }
 
-            // setMessages((prevMessages) => {
-            //     const newMessages = [...prevMessages];
-            //     newMessages[newMessages.length - 1] = { role : "assistant", content: last_msg };
-            //     return newMessages;
-            // });
+            last_msg = last_msg.slice(0, last_msg.length - UNDEFINED_LEN);
+            setMessages((prevMessages) => {
+                const newMessages = [...prevMessages];
+                newMessages[newMessages.length - 1] = { role : "assistant", content: last_msg };
+                return newMessages;
+            });
+
+            // console.log("stream finished, final message:\n", last_msg);
+            
             
         } catch (error) {
             // todo - UI response for error
