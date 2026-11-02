@@ -4,7 +4,6 @@ import "./chat.css"
 
 import ChatInput from "./ChatInput.jsx";
 import Message from "./Message.jsx";
-import StreamingMessage from "./StreamingMessage.jsx";
 
 import puter from "@heyputer/puter.js"
 import { useState } from "react";
